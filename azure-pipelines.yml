@@ -21,8 +21,8 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: CopyFiles@2
+task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)'C:\Users\gurud\git\AppiumProject\AppiumProject'
-    Contents: 'a765f73a-7709-4bb5-9302-65f8c1556d23.apk'
-    TargetFolder: '$(Build.SourcesDirectory)/target/upload'
+    SourceFolder: '$(Build.SourcesDirectory)\target'
+    Contents: 'fls.apk'
+    TargetFolder: '$(Build.SourcesDirectory)\target\upload'
