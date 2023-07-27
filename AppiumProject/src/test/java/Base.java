@@ -1,19 +1,30 @@
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import com.microsoft.appcenter.appium.Factory;
+import com.microsoft.appcenter.appium.EnhancedAndroidDriver;
+import org.junit.rules.TestWatcher;
+import org.junit.Rule;
 
 public class Base {
 
-    private AndroidDriver driver;
-
+	private AndroidDriver driver;
+	
+    
+    @Rule
+    public TestWatcher watcher = Factory.createWatcher();
+   
     @Before
     public void setUp() {
         // Set up desired capabilities for the Appium driver
@@ -29,7 +40,7 @@ public class Base {
         try {
             URL url = new URL(URL_STRING);
             driver = new AndroidDriver(url, capabilities);
-
+           
             // Set implicit wait and other configurations
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         } catch (MalformedURLException e) {
@@ -45,13 +56,13 @@ public class Base {
    Thread.sleep(5000);
         driver.findElement(By.xpath("//*[@text='Login']")).click();
     }
-    
-
-    @After
-    public void tearDown() {
-        // Close the driver and quit the Appium session
-        if (driver != null) {
-            driver.quit();
-        }
+            
+            @After
+            public void tearDown() {
+                // Close the driver and quit the Appium session
+                if (driver != null) {
+                    driver.quit();
+                }
+            }
     }
-}
+
